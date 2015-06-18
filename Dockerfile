@@ -8,6 +8,7 @@ RUN yum update -y
 RUN yum install httpd -y
 RUN yum install -y openssh openssh-server
 RUN echo 'root:asdasd' |chpasswd
+RUN sed -i "s/#UsePrivilegeSeparation.*/UsePrivilegeSeparation no/g" /etc/ssh/sshd_config && sed -i "s/UsePAM.*/UsePAM no/g" /etc/ssh/sshd_config
 RUN ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key
 RUN ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key
 
